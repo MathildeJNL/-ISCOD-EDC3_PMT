@@ -1,6 +1,7 @@
-FROM node:24-alpine AS build
+FROM node:24.13.0-alpine AS build
 WORKDIR /workspace
 COPY package*.json ./
+RUN npm install -g npm@11.6.2
 RUN npm ci
 COPY . .
 RUN npm run build
