@@ -1,0 +1,102 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="sidebar-brand" routerLink="/projects">
+      <span class="material-symbols-outlined">hub</span>
+      <strong>ProjetHub</strong>
+    </a>
+    <nav>
+      <a routerLink="/projects"><span class="material-symbols-outlined">folder</span> Projets</a>
+      @if (task()) {
+        <a [routerLink]="['/projects', task()!.projectId, 'board']">
+          <span class="material-symbols-outlined">view_kanban</span> Board
+        </a>
+      }
+      <a routerLink="/notifications"><span class="material-symbols-outlined">notifications</span> Notifications</a>
+    </nav>
+  </aside>
+
+  <main class="workspace">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Details de la tache</p>
+        <h1>{{ task()?.title ?? 'Tache' }}</h1>
+      </div>
+      @if (task()) {
+        <a class="secondary-action" [routerLink]="['/projects', task()!.projectId, 'board']">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Retour board
+        </a>
+      }
+    </header>
+
+    @if (error()) {
+      <p class="alert">{{ error() }}</p>
+    }
+    @if (saved()) {
+      <p class="success">Tache mise a jour.</p>
+    }
+
+    <section class="task-detail-layout">
+      <form class="editor-panel" [formGroup]="form" (ngSubmit)="save()">
+        <label><span>Titre</span><input type="text" formControlName="title" /></label>
+        <label><span>Description</span><textarea rows="7" formControlName="description"></textarea></label>
+        <div class="form-grid">
+          <label><span>Echeance</span><input type="date" formControlName="dueDate" /></label>
+          <label>
+            <span>Priorite</span>
+            <select formControlName="priority">
+              @for (priority of priorities; track priority) {
+                <option [ngValue]="priority">{{ priorityLabel[priority] }}</option>
+              }
+            </select>
+          </label>
+          <label>
+            <span>Statut</span>
+            <select formControlName="status">
+              @for (status of statuses; track status) {
+                <option [ngValue]="status">{{ statusLabel[status] }}</option>
+              }
+            </select>
+          </label>
+        </div>
+
+        <section class="assignees">
+          <h2>Membres assignes</h2>
+          <div class="avatar-row">
+            @for (assignee of task()?.assignees ?? []; track assignee.id) {
+              <span class="avatar" [title]="assignee.email">{{ assignee.username.slice(0, 2).toUpperCase() }}</span>
+            } @empty {
+              <span class="muted">Aucun assignee</span>
+            }
+          </div>
+        </section>
+
+        <button class="primary-action" type="submit">
+          <span class="material-symbols-outlined">save</span>
+          Mettre a jour
+        </button>
+      </form>
+
+      <aside class="history-panel">
+        <header>
+          <span class="material-symbols-outlined">history</span>
+          <h2>Historique</h2>
+        </header>
+        <div class="timeline">
+          @for (item of history(); track item.id) {
+            <article>
+              <span class="timeline-dot"></span>
+              <div>
+                <strong>{{ item.actor }}</strong>
+                <p>{{ item.details }}</p>
+                <small>{{ item.action }} - {{ item.createdAt | date: 'dd MMM yyyy HH:mm' }}</small>
+              </div>
+            </article>
+          } @empty {
+            <p class="muted">Aucune activite.</p>
+          }
+        </div>
+      </aside>
+    </section>
+  </main>
+</div>

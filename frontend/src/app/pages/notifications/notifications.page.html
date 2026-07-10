@@ -1,0 +1,55 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="sidebar-brand" routerLink="/projects">
+      <span class="material-symbols-outlined">hub</span>
+      <strong>ProjetHub</strong>
+    </a>
+    <nav>
+      <a routerLink="/projects"><span class="material-symbols-outlined">folder</span> Projets</a>
+      <a class="active" routerLink="/notifications">
+        <span class="material-symbols-outlined">notifications</span>
+        Notifications
+      </a>
+    </nav>
+  </aside>
+
+  <main class="workspace">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Centre de suivi</p>
+        <h1>Notifications</h1>
+      </div>
+    </header>
+
+    @if (error()) {
+      <p class="alert">{{ error() }}</p>
+    }
+
+    <section class="notification-list">
+      @for (notification of notifications(); track notification.id) {
+        <article [class.unread]="!notification.readAt">
+          <span class="material-symbols-outlined">mark_email_unread</span>
+          <div>
+            <h2>{{ notification.title }}</h2>
+            <p>{{ notification.message }}</p>
+            <small>{{ notification.createdAt | date: 'dd MMM yyyy HH:mm' }}</small>
+          </div>
+          <div class="notification-actions">
+            @if (notification.taskId) {
+              <a class="secondary-action" [routerLink]="['/tasks', notification.taskId]">Voir tache</a>
+            } @else {
+              <a class="secondary-action" [routerLink]="['/projects', notification.projectId, 'board']">
+                Voir projet
+              </a>
+            }
+            @if (!notification.readAt) {
+              <button type="button" class="primary-action" (click)="markRead(notification)">Lu</button>
+            }
+          </div>
+        </article>
+      } @empty {
+        <p class="empty-column">Aucune notification.</p>
+      }
+    </section>
+  </main>
+</div>

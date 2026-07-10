@@ -1,0 +1,166 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="sidebar-brand" routerLink="/projects">
+      <span class="material-symbols-outlined">hub</span>
+      <strong>ProjetHub</strong>
+    </a>
+    <nav>
+      <a routerLink="/projects"><span class="material-symbols-outlined">folder</span> Projets</a>
+      <a class="active"><span class="material-symbols-outlined">view_kanban</span> Board</a>
+      <a routerLink="/notifications"><span class="material-symbols-outlined">notifications</span> Notifications</a>
+    </nav>
+  </aside>
+
+  <main class="workspace board-workspace">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Tableau Kanban</p>
+        <h1>{{ project()?.name ?? 'Projet' }}</h1>
+        <p class="muted">{{ project()?.description }}</p>
+      </div>
+      <div class="topbar-actions">
+        <button class="secondary-action" type="button" (click)="showInviteForm.set(true)">
+          <span class="material-symbols-outlined">person_add</span>
+          Inviter
+        </button>
+        <button class="primary-action" type="button" (click)="showTaskForm.set(true)">
+          <span class="material-symbols-outlined">add_task</span>
+          Nouvelle tache
+        </button>
+      </div>
+    </header>
+
+    @if (error()) {
+      <p class="alert">{{ error() }}</p>
+    }
+
+    <section class="member-strip">
+      @for (member of members(); track member.id) {
+        <article>
+          <div class="avatar">{{ member.username.slice(0, 2).toUpperCase() }}</div>
+          <div>
+            <strong>{{ member.username }}</strong>
+            <small>{{ member.email }}</small>
+          </div>
+          <select [value]="member.role" (change)="changeRole(member, $event)" aria-label="Role projet">
+            @for (role of roles; track role) {
+              <option [value]="role">{{ role }}</option>
+            }
+          </select>
+        </article>
+      }
+    </section>
+
+    <section class="kanban-board">
+      @for (status of statuses; track status) {
+        <article class="kanban-column">
+          <header>
+            <h2>{{ statusLabel[status] }}</h2>
+            <span>{{ tasksByStatus(status).length }}</span>
+          </header>
+
+          <div class="task-stack">
+            @for (task of tasksByStatus(status); track task.id) {
+              <article class="task-card" [class.done]="task.status === 'DONE'">
+                <div class="task-card-top">
+                  <span class="priority" [class]="task.priority.toLowerCase()">
+                    {{ priorityLabel[task.priority] }}
+                  </span>
+                  <a [routerLink]="['/tasks', task.id]" aria-label="Details tache">
+                    <span class="material-symbols-outlined">open_in_new</span>
+                  </a>
+                </div>
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.description }}</p>
+                <div class="task-meta">
+                  <span><span class="material-symbols-outlined">event</span>{{ task.dueDate | date: 'dd MMM' }}</span>
+                  <span>{{ task.assignees.length }} assignee(s)</span>
+                </div>
+                <div class="task-actions">
+                  @for (nextStatus of statuses; track nextStatus) {
+                    @if (nextStatus !== task.status) {
+                      <button type="button" (click)="moveTask(task, nextStatus)">
+                        {{ statusLabel[nextStatus] }}
+                      </button>
+                    }
+                  }
+                </div>
+              </article>
+            } @empty {
+              <p class="empty-column">Aucune tache</p>
+            }
+          </div>
+        </article>
+      }
+    </section>
+  </main>
+</div>
+
+@if (showTaskForm()) {
+  <div class="modal-backdrop" (click)="showTaskForm.set(false)">
+    <section class="modal-panel" (click)="$event.stopPropagation()">
+      <header>
+        <h2>Nouvelle tache</h2>
+        <button class="icon-button" type="button" (click)="showTaskForm.set(false)" aria-label="Fermer">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </header>
+      <form [formGroup]="taskForm" (ngSubmit)="createTask()">
+        <label><span>Titre</span><input type="text" formControlName="title" /></label>
+        <label><span>Description</span><textarea rows="4" formControlName="description"></textarea></label>
+        <div class="form-grid">
+          <label><span>Echeance</span><input type="date" formControlName="dueDate" /></label>
+          <label>
+            <span>Priorite</span>
+            <select formControlName="priority">
+              @for (priority of priorities; track priority) {
+                <option [ngValue]="priority">{{ priorityLabel[priority] }}</option>
+              }
+            </select>
+          </label>
+        </div>
+        <label>
+          <span>Assignee</span>
+          <select formControlName="assigneeId">
+            <option [ngValue]="0">Non assignee</option>
+            @for (member of members(); track member.id) {
+              <option [ngValue]="member.userId">{{ member.username }}</option>
+            }
+          </select>
+        </label>
+        <div class="modal-actions">
+          <button class="secondary-action" type="button" (click)="showTaskForm.set(false)">Annuler</button>
+          <button class="primary-action" type="submit">Creer</button>
+        </div>
+      </form>
+    </section>
+  </div>
+}
+
+@if (showInviteForm()) {
+  <div class="modal-backdrop" (click)="showInviteForm.set(false)">
+    <section class="modal-panel" (click)="$event.stopPropagation()">
+      <header>
+        <h2>Inviter un membre</h2>
+        <button class="icon-button" type="button" (click)="showInviteForm.set(false)" aria-label="Fermer">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </header>
+      <form [formGroup]="inviteForm" (ngSubmit)="inviteMember()">
+        <label><span>E-mail</span><input type="email" formControlName="email" /></label>
+        <label>
+          <span>Role</span>
+          <select formControlName="role">
+            @for (role of roles; track role) {
+              <option [ngValue]="role">{{ role }}</option>
+            }
+          </select>
+        </label>
+        <div class="modal-actions">
+          <button class="secondary-action" type="button" (click)="showInviteForm.set(false)">Annuler</button>
+          <button class="primary-action" type="submit">Inviter</button>
+        </div>
+      </form>
+    </section>
+  </div>
+}

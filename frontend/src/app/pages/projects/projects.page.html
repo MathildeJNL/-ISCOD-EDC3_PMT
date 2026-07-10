@@ -1,0 +1,104 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="sidebar-brand" routerLink="/projects">
+      <span class="material-symbols-outlined">hub</span>
+      <strong>ProjetHub</strong>
+    </a>
+    <nav>
+      <a class="active" routerLink="/projects"><span class="material-symbols-outlined">folder</span> Projets</a>
+      <a routerLink="/notifications"><span class="material-symbols-outlined">notifications</span> Notifications</a>
+    </nav>
+    <button class="ghost-on-dark" type="button" (click)="logout()">
+      <span class="material-symbols-outlined">logout</span>
+      Deconnexion
+    </button>
+  </aside>
+
+  <main class="workspace">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Espace collaboratif</p>
+        <h1>Mes projets</h1>
+      </div>
+      <div class="topbar-actions">
+        <label class="search">
+          <span class="material-symbols-outlined">search</span>
+          <input
+            type="search"
+            placeholder="Rechercher..."
+            [value]="query()"
+            (input)="query.set($any($event.target).value)"
+          />
+        </label>
+        <button class="primary-action" type="button" (click)="showCreate.set(true)">
+          <span class="material-symbols-outlined">add</span>
+          Nouveau projet
+        </button>
+      </div>
+    </header>
+
+    @if (error()) {
+      <p class="alert">{{ error() }}</p>
+    }
+
+    <section class="stats-grid" aria-label="Statistiques projets">
+      <article><span>Total</span><strong>{{ stats().total }}</strong></article>
+      <article><span>En cours</span><strong>{{ stats().active }}</strong></article>
+      <article><span>Termines</span><strong>{{ stats().done }}</strong></article>
+      <article><span>A surveiller</span><strong>{{ stats().late }}</strong></article>
+    </section>
+
+    <section class="project-grid">
+      @for (project of filteredProjects(); track project.id) {
+        <a class="project-card" [routerLink]="['/projects', project.id, 'board']">
+          <div class="card-icon"><span class="material-symbols-outlined">rocket_launch</span></div>
+          <div>
+            <h2>{{ project.name }}</h2>
+            <p>{{ project.description }}</p>
+          </div>
+          <footer>
+            <span><span class="material-symbols-outlined">calendar_today</span> {{ project.startDate | date: 'dd MMM yyyy' }}</span>
+            <span class="status-pill">Actif</span>
+          </footer>
+        </a>
+      } @empty {
+        <button class="empty-state" type="button" (click)="showCreate.set(true)">
+          <span class="material-symbols-outlined">add_circle</span>
+          Creer votre premier projet
+        </button>
+      }
+    </section>
+  </main>
+</div>
+
+@if (showCreate()) {
+  <div class="modal-backdrop" (click)="showCreate.set(false)">
+    <section class="modal-panel" (click)="$event.stopPropagation()">
+      <header>
+        <h2>Nouveau projet</h2>
+        <button class="icon-button" type="button" (click)="showCreate.set(false)" aria-label="Fermer">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </header>
+
+      <form [formGroup]="createForm" (ngSubmit)="createProject()">
+        <label>
+          <span>Nom</span>
+          <input type="text" formControlName="name" placeholder="Refonte application interne" />
+        </label>
+        <label>
+          <span>Description</span>
+          <textarea formControlName="description" rows="4" placeholder="Objectifs et contexte du projet"></textarea>
+        </label>
+        <label>
+          <span>Date de debut</span>
+          <input type="date" formControlName="startDate" />
+        </label>
+        <div class="modal-actions">
+          <button class="secondary-action" type="button" (click)="showCreate.set(false)">Annuler</button>
+          <button class="primary-action" type="submit">Creer</button>
+        </div>
+      </form>
+    </section>
+  </div>
+}
