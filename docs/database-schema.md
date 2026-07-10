@@ -1,4 +1,4 @@
-# Schema de base de donnees PMT
+# Schema de base de donnees ProjetHub
 
 ```mermaid
 erDiagram

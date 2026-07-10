@@ -4,7 +4,7 @@ insert into app_users (id, username, email, password_hash, created_at) values
     (3, 'mariana', 'mariana@example.com', 'pbkdf2$65536$bWFyaWFuYS1zYWx0LTAx$kfh7kXfsdyUCELKFbXf2FiKeuXhCd9+2X/2d3Pe70DU=', now());
 
 insert into projects (id, name, description, start_date, created_at) values
-    (1, 'PMT - Project Management Tool', 'Plateforme de gestion de projet collaboratif pour equipes de developpement logiciel.', '2026-07-01', now()),
+    (1, 'ProjetHub', 'Plateforme de gestion de projet collaboratif pour equipes de developpement logiciel.', '2026-07-01', now()),
     (2, 'Refonte portail client', 'Modernisation du portail client et suivi des demandes support.', '2026-06-15', now());
 
 insert into project_members (id, project_id, user_id, role, joined_at) values
