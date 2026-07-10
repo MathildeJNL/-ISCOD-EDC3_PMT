@@ -97,17 +97,29 @@ Le workflow `.github/workflows/ci-cd.yml` :
 
 1. execute les tests backend et publie le rapport Jacoco en artefact ;
 2. execute les tests frontend avec couverture et build Angular ;
-3. construit et pousse les images Docker Hub sur `main`.
+3. construit et pousse les images Docker Hub sur `main` ou `master`.
+
+Le workflow se lance automatiquement sur `push` et `pull_request` vers `main` ou `master`.
+Il peut aussi etre lance manuellement depuis l'onglet GitHub Actions avec `workflow_dispatch`.
 
 Secrets GitHub requis :
 
 - `DOCKERHUB_USERNAME`
 - `DOCKERHUB_TOKEN`
 
+Ces secrets doivent etre ajoutes dans le depot GitHub :
+`Settings` > `Secrets and variables` > `Actions` > `New repository secret`.
+
+Le token Docker Hub doit etre un token d'acces Docker Hub, pas le mot de passe du compte.
+Sans ces deux secrets, les tests CI s'executent mais le job Docker echoue explicitement.
+
 Images poussees :
 
 - `${DOCKERHUB_USERNAME}/pmt-backend:latest`
 - `${DOCKERHUB_USERNAME}/pmt-frontend:latest`
+
+Le fichier `frontend/package-lock.json` est versionne volontairement. Il est requis par
+`npm ci` pour garantir des installations reproductibles en CI.
 
 ## Conception
 
