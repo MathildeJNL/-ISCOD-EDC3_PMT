@@ -85,13 +85,19 @@ button {
   text-decoration: none;
 }
 
-.sidebar-brand .material-symbols-outlined {
+.sidebar-brand .material-symbols-outlined,
+.sidebar-brand .brand-logo {
   display: grid;
   width: 38px;
   height: 38px;
   place-items: center;
   border-radius: 8px;
   background: var(--primary-soft);
+}
+
+.brand-logo {
+  flex: 0 0 auto;
+  object-fit: cover;
 }
 
 .sidebar nav {

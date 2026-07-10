@@ -1,6 +1,6 @@
-# PMT - Project Management Tool
+# ProjetHub
 
-Application full stack Angular + Spring Boot pour l'etude de cas PMT. Elle couvre l'inscription, la connexion, la creation de projets, l'invitation de membres, les roles projet, les taches Kanban, l'assignation, les notifications et l'historique des modifications.
+Application full stack Angular + Spring Boot pour l'etude de cas ProjetHub. Elle couvre l'inscription, la connexion, la creation de projets, l'invitation de membres, les roles projet, les taches Kanban, l'assignation, les notifications et l'historique des modifications.
 
 ## Stack
 
@@ -13,7 +13,7 @@ Application full stack Angular + Spring Boot pour l'etude de cas PMT. Elle couvr
 
 Le mot de passe des comptes inseres par `database/test-data.sql` est `Password123!`.
 
-- `mathilde@example.com` : administratrice du projet PMT.
+- `mathilde@example.com` : administratrice du projet ProjetHub.
 - `nicolas@example.com` : membre.
 - `mariana@example.com` : observatrice.
 
