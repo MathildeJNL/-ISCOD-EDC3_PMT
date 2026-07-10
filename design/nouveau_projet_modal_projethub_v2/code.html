@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ProjetHub - Mes Projets</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#43474b",
+                    "tertiary-fixed": "#dfe3e7",
+                    "on-primary-fixed": "#100069",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#d3e4fe",
+                    "on-primary-container": "#c1beff",
+                    "on-background": "#131b2e",
+                    "tertiary-container": "#4d5255",
+                    "primary-fixed": "#e3dfff",
+                    "inverse-surface": "#283044",
+                    "tertiary": "#363b3e",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#4338ca",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d2d9f4",
+                    "surface": "#faf8ff",
+                    "surface-container-high": "#e2e7ff",
+                    "outline": "#777586",
+                    "secondary-container": "#d0e1fb",
+                    "surface-variant": "#dae2fd",
+                    "surface-container": "#eaedff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#c1c5c9",
+                    "secondary": "#505f76",
+                    "on-surface": "#131b2e",
+                    "background": "#faf8ff",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#5148d7",
+                    "outline-variant": "#c7c4d7",
+                    "on-surface-variant": "#464554",
+                    "surface-container-low": "#f2f3ff",
+                    "surface-container-highest": "#dae2fd",
+                    "on-tertiary-fixed": "#171c1f",
+                    "tertiary-fixed-dim": "#c3c7cb",
+                    "inverse-primary": "#c3c0ff",
+                    "surface-bright": "#faf8ff",
+                    "on-primary-fixed-variant": "#372abf",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "inverse-on-surface": "#eef0ff",
+                    "primary": "#2a14b4",
+                    "on-secondary-container": "#54647a",
+                    "on-secondary-fixed": "#0b1c30"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "stack-lg": "24px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "32px",
+                    "sidebar-width": "280px",
+                    "stack-sm": "8px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen overflow-hidden">
+<!-- Background Content from SCREEN_8 -->
+<!-- Sidebar Navigation (Desktop) -->
+<aside class="hidden md:flex flex-col h-screen fixed left-0 top-0 z-50 bg-inverse-surface w-sidebar-width">
+<div class="px-stack-lg py-stack-lg border-b border-white/10">
+<h1 class="font-headline-md text-headline-md text-white">ProjetHub</h1>
+<p class="font-label-md text-label-md text-outline-variant opacity-70">Collaborative Space</p>
+</div>
+<nav class="flex-grow py-stack-md">
+<a class="flex items-center gap-stack-md px-stack-lg py-stack-md text-white bg-primary-container border-l-4 border-surface-tint transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+<span class="font-label-md text-label-md">Projects</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-lg py-stack-md text-outline-variant hover:text-white hover:bg-surface-variant/10 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-md text-label-md">Tasks</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-lg py-stack-md text-outline-variant hover:text-white hover:bg-surface-variant/10 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-label-md text-label-md">Notifications</span>
+</a>
+</nav>
+<div class="px-stack-lg mb-stack-md">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-xl font-label-md text-label-md hover:bg-primary-container transition-all shadow-lg active:scale-95 group">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Nouveau Projet
+            </button>
+</div>
+<div class="py-stack-md border-t border-white/10">
+<a class="flex items-center gap-stack-md px-stack-lg py-stack-md text-outline-variant hover:text-white hover:bg-surface-variant/10 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-lg py-stack-md text-outline-variant hover:text-white hover:bg-surface-variant/10 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-sidebar-width transition-all duration-300">
+<header class="flex justify-between items-center w-full px-gutter h-16 bg-background border-b border-outline-variant sticky top-0 z-40">
+<div class="flex items-center gap-stack-md">
+<button class="md:hidden p-2 text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:block">
+<h2 class="font-title-lg text-title-lg text-primary">Tableau de Bord</h2>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-[20px]">search</span>
+<input class="pl-10 pr-4 py-2 rounded-full border border-outline-variant bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all w-64 text-sm" placeholder="Rechercher..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden ml-2 border border-outline-variant">
+<img alt="User profile" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDkGXclLTM0vR_6eGGINV6tmKhMmtf1VFhWH2BCedKKIvoDs_m-HjXRoGuqpHYJA8RRziHRo4KK5nP_C7G3-rq-fKDzU30K0XQ2Cwq94B2a08YWY6ssSruuxP4fkSfInQwe6Tcv_X1BJVzN8NpAouqnC-ZM1QtdigNzz5FEsGg11zcXfxJW2Gh0EUkgvyKsc2JnHDF3FWjac3A4GKEo02ugxqKcK1yGavPRTaX3MobzGzsPX-iEcPeSWM9zvmWw1Ley7lnn9JuJDXG"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-gutter max-w-7xl mx-auto">
+<div class="mb-margin-desktop flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-background">Mes Projets</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Gérez et suivez l'avancement de vos initiatives collaboratives.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-label-md text-label-md hover:bg-primary-container transition-all shadow-lg active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                    Nouveau Projet
+                </button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-stack-md mb-gutter">
+<div class="bg-surface-container-low p-stack-lg rounded-xl border border-outline-variant/30">
+<span class="text-primary font-label-md uppercase tracking-wider">Total</span>
+<p class="text-3xl font-bold text-on-surface mt-1">12</p>
+</div>
+<div class="bg-surface-container-low p-stack-lg rounded-xl border border-outline-variant/30">
+<span class="text-on-secondary-container font-label-md uppercase tracking-wider">En cours</span>
+<p class="text-3xl font-bold text-on-surface mt-1">8</p>
+</div>
+<div class="bg-surface-container-low p-stack-lg rounded-xl border border-outline-variant/30">
+<span class="text-on-surface-variant font-label-md uppercase tracking-wider">Terminés</span>
+<p class="text-3xl font-bold text-on-surface mt-1">4</p>
+</div>
+<div class="bg-surface-container-low p-stack-lg rounded-xl border border-outline-variant/30">
+<span class="text-error font-label-md uppercase tracking-wider">En retard</span>
+<p class="text-3xl font-bold text-on-surface mt-1">1</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Project Card 1 -->
+<div class="group bg-surface-container-lowest border border-slate-200 rounded-xl p-stack-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between h-full">
+<div class="absolute top-0 right-0 p-stack-md">
+<span class="bg-primary/10 text-primary text-[10px] font-bold uppercase px-2 py-1 rounded">Actif</span>
+</div>
+<div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-stack-md">
+<span class="material-symbols-outlined text-primary">rocket_launch</span>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors">Refonte Site Web 2024</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 line-clamp-2">Migration vers une architecture headless avec un focus sur la performance et l'accessibilité globale.</p>
+</div>
+<div class="mt-stack-lg flex flex-col gap-stack-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-outline text-[12px]">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span class="">15 Jan 2024</span>
+</div>
+<div class="flex -space-x-2">
+<img alt="avatar" class="w-7 h-7 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8n87_zW5POeLnKUDeZVWI7TNNBl_EVZvObaawWHF70prKQsq_uCW1b-7f3XxXXSCZZdtLQCyzpK3kKldT-XAnkPwHPNQrdcd654a-N223gFtjLMjDcG2I9kJwUamWjtsRudPC4Ksx0mSfH4_7H8hzSPHflQoCw4dKst76qymg7Zsclc_EQ58L_s6YFUeBage1ik-fPBZkCsG_gmBLPLZzG7M9H8zo8isqoaaAiPjjbuEAwOgScP4tUJfIHE_S9YW2_rUrkUqD9Uf0"/>
+<img alt="avatar" class="w-7 h-7 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5YM0xWq7iHChfk_hp0rR_79_INjU8VUbEBdDPSv3LEEEHHHzTbr2io28tc8imNOFpcDR8tjdo98n2ynkFx_qo9ACNByx6tRBDUxYL048lcf8i8LN1wCTTdadfMCBFoju24pXnHAQ8kVbbPc2g2BuZ7AVz3jvAeU2Wl1JytBhXEtRM-NzWAkW1ABcLo9nDZ0ciqh0OUg2ln0uxehrhniY1gzqCOTijh-3OIuP7KsNUdikWQOF1m4bUI9QijlsydgiyWsec8uEI9mg5"/>
+<div class="w-7 h-7 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold">+3</div>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="group bg-surface-container-lowest border border-slate-200 rounded-xl p-stack-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full">
+<div>
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center mb-stack-md">
+<span class="material-symbols-outlined text-secondary">analytics</span>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors">Campagne Marketing Q1</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 line-clamp-2">Stratégie de contenu multicanal ciblant les entreprises du secteur technologique européen.</p>
+</div>
+<div class="mt-stack-lg flex flex-col gap-stack-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-outline text-[12px]">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span class="">02 Feb 2024</span>
+</div>
+<div class="flex -space-x-2">
+<img alt="avatar" class="w-7 h-7 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7LODJnN7HPHMHDgZP3fZnYWt3_FhE7a0Z0S-d_Mxjd_SraNqxHBs69-ZCYoA0s7A5R7Ssja6OXqFhmwUoL4xBmbtPU0MiUPv63Dqe2VmAVSy8RfbTBn95ul0YhRjt3CtlcVKpSRicJcnNrVAos3-stbWt5OLSJBzWOvTymSAB_gOYLa-_gegfFj6eWGd7faDJ7tqz3TClO59yFE9tddqgBPArfQaCjxsx2RgR9NIHrtSUGdzJJ99o6l3mANX506txTH1IMIW-ePvs"/>
+<div class="w-7 h-7 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold">+2</div>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 30%"></div>
+</div>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="group bg-surface-container-lowest border border-slate-200 rounded-xl p-stack-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full">
+<div>
+<div class="w-12 h-12 bg-surface-container-highest rounded-lg flex items-center justify-center mb-stack-md">
+<span class="material-symbols-outlined text-on-surface">inventory_2</span>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors">Archivage Données 2023</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 line-clamp-2">Nettoyage et migration sécurisée des données historiques vers le cloud hybride.</p>
+</div>
+<div class="mt-stack-lg flex flex-col gap-stack-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-outline text-[12px]">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span class="">10 Dec 2023</span>
+</div>
+<div class="flex -space-x-2">
+<img alt="avatar" class="w-7 h-7 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPK1stHawD6zpfQMgI-8qo---6RGIsn9qcGr_KunJsyXNqkL27OHlGDhNB742AQpIDIFgWrtQoLtsMHJXqBvpiEteWk5a3R5olGj4sZFsEiaJXQPYXrgtbmGAFrknDfPrdN77BNFHiNcTp7aeBuqQ6nTRbjbjqiyv9vT2KFGp76aVNjXh6kw6jU9q5csZDdZai-QTlJyuivwlcyDCFH9TgEtb-GeAjrQ6y5J1GsBlhWjf7x-rskY5pghEmqKp7Fy26-2_Ua5E7P6Sc"/>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-green-500 h-1.5 rounded-full" style="width: 100%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal Overlay (Exactly as provided in source) -->
+<div class="fixed inset-0 bg-on-background/40 backdrop-blur-[2px] z-[100] flex items-center justify-center p-4" id="modalOverlay">
+<!-- Modal Container -->
+<div class="bg-surface-container-lowest w-full max-w-md rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300 border border-outline-variant">
+<!-- Modal Header -->
+<div class="px-gutter py-stack-md border-b border-outline-variant flex items-center justify-between bg-surface-container-low">
+<h2 class="font-headline-md text-headline-md text-on-surface">Nouveau Projet</h2>
+<button class="p-1 hover:bg-surface-variant rounded-full transition-colors" onclick="closeModal()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body (Form) -->
+<div class="p-gutter space-y-stack-md">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant" for="projName">Nom du projet</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none font-body-md text-body-md transition-all" id="projName" placeholder="Ex: Campagne Été 2024" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant" for="projDesc">Description</label>
+<textarea class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none font-body-md text-body-md transition-all resize-none" id="projDesc" placeholder="Décrivez les objectifs et les livrables..." rows="4"></textarea>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant" for="projDate">Date de début</label>
+<div class="relative">
+<input class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none font-body-md text-body-md transition-all appearance-none" id="projDate" type="date"/>
+<span class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant pointer-events-none" data-icon="calendar_month">calendar_month</span>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-gutter py-stack-md bg-surface-container-low border-t border-outline-variant flex justify-end gap-stack-sm">
+<button class="px-6 py-2 rounded-lg font-body-md text-body-md text-secondary border border-outline-variant hover:bg-surface-variant transition-colors" onclick="closeModal()">
+                    Annuler
+                </button>
+<button class="px-6 py-2 rounded-lg font-body-md text-body-md bg-primary-container text-white hover:opacity-90 transition-opacity shadow-sm active:scale-95">
+                    Créer le projet
+                </button>
+</div>
+</div>
+</div>
+<script>
+        function closeModal() {
+            const modal = document.getElementById('modalOverlay');
+            modal.style.opacity = '0';
+            modal.style.transition = 'opacity 0.2s ease-out';
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }, 200);
+        }
+
+        function openModal() {
+            const modal = document.getElementById('modalOverlay');
+            modal.classList.remove('hidden');
+            modal.style.opacity = '1';
+            document.body.classList.add('overflow-hidden');
+        }
+
+        // Add event listeners to buttons
+        document.querySelectorAll('button').forEach(btn => {
+            if(btn.innerText.includes('Nouveau Projet')) {
+                btn.addEventListener('click', openModal);
+            }
+        });
+    </script>
+</body></html>

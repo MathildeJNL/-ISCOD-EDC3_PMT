@@ -1,0 +1,295 @@
+<!DOCTYPE html><html class="light" lang="fr"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ProjetHub - Authentification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#5148d7",
+                        "surface-variant": "#dae2fd",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-primary-fixed": "#100069",
+                        "secondary": "#505f76",
+                        "outline-variant": "#c7c4d7",
+                        "on-tertiary-fixed-variant": "#43474b",
+                        "inverse-primary": "#c3c0ff",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#e3dfff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eaedff",
+                        "tertiary-container": "#4d5255",
+                        "surface-container-high": "#e2e7ff",
+                        "tertiary-fixed": "#dfe3e7",
+                        "tertiary-fixed-dim": "#c3c7cb",
+                        "on-secondary-container": "#54647a",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary": "#2a14b4",
+                        "surface-container-low": "#f2f3ff",
+                        "surface-container-highest": "#dae2fd",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#171c1f",
+                        "background": "#faf8ff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#faf8ff",
+                        "surface": "#faf8ff",
+                        "inverse-on-surface": "#eef0ff",
+                        "primary-container": "#4338ca",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "secondary-container": "#d0e1fb",
+                        "outline": "#777586",
+                        "on-tertiary-container": "#c1c5c9",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-background": "#131b2e",
+                        "on-primary-container": "#c1beff",
+                        "surface-dim": "#d2d9f4",
+                        "inverse-surface": "#283044",
+                        "on-primary-fixed-variant": "#372abf",
+                        "on-surface": "#131b2e",
+                        "on-surface-variant": "#464554",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#363b3e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "sidebar-width": "280px",
+                        "stack-lg": "24px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<main class="flex min-h-screen">
+<!-- Left Side: Visual Content (Desktop Only) -->
+<section class="hidden lg:flex w-1/2 relative overflow-hidden bg-inverse-surface items-center justify-center p-stack-lg">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 z-0">
+<img alt="Team Collaboration" class="w-full h-full object-cover opacity-40" data-alt="A cinematic wide shot of a diverse professional team collaborating in a bright, high-tech architectural office. Soft morning light streams through floor-to-ceiling windows, illuminating a workspace filled with minimalist furniture and vibrant indoor plants. The color palette features sophisticated grays and deep blues with warm wood accents. The atmosphere is productive, creative, and harmonious, reflecting a premium corporate modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrbQ2UR_Tui2TzN3htdykEepGpKwxgX2E4Qf0V35MxHdW4mpSmYUDoNc4e6k-qTDC4QbULkE37n5ZPVk4cV6YvnpTZRRUqvcEH8EqmYkqPf3u_74lYcOaPLW8sJA2XzlctH6WRyu_hyjpuINc22oM-6i45haamZicBhKvrU2Q8ZB33PUspcbU65D9lUqjffIk3Pvc0bPf6RMUF8BgxJswV22CDccj5DPFYINJJ0tuLMOhzZNYD0la-SkQNRS-aTbGAHbaJtsigMK1z">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/60 to-transparent"></div>
+</div>
+<!-- Floating Bento Content -->
+<div class="relative z-10 w-full max-w-lg space-y-stack-lg">
+<div class="glass-card p-stack-lg rounded-xl shadow-lg transform -rotate-1 hover:rotate-0 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-4xl mb-stack-sm">rocket_launch</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">Accélérez vos projets.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Centralisez vos flux de travail et boostez la productivité de votre équipe avec ProjetHub.</p>
+</div>
+<div class="grid grid-cols-2 gap-stack-md">
+<div class="glass-card p-stack-md rounded-xl shadow-md">
+<div class="flex items-center gap-stack-sm mb-2">
+<span class="material-symbols-outlined text-primary-container">groups</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary">Équipes</span>
+</div>
+<p class="font-title-lg text-title-lg">Collaboration fluide</p>
+</div>
+<div class="glass-card p-stack-md rounded-xl shadow-md transform translate-y-stack-md">
+<div class="flex items-center gap-stack-sm mb-2">
+<span class="material-symbols-outlined text-secondary">assignment_turned_in</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-secondary">Tâches</span>
+</div>
+<p class="font-title-lg text-title-lg">Suivi en temps réel</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Side: Auth Form -->
+<section class="w-full lg:w-1/2 flex flex-col justify-center items-center p-gutter md:p-margin-desktop bg-surface">
+<!-- Brand Logo (Mobile specific visibility) -->
+<div class="w-full max-w-md mb-margin-desktop">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight">ProjetHub</h1>
+</div>
+</div>
+<div class="w-full max-w-md">
+<!-- Tabs Toggle -->
+<div class="flex bg-surface-container rounded-full p-1 mb-stack-lg relative" id="authTabs">
+<button class="flex-1 py-2 rounded-full font-label-md text-label-md transition-all duration-300 z-10 text-on-surface" id="loginTab" onclick="switchTab('login')">Connexion</button>
+<button class="flex-1 py-2 rounded-full font-label-md text-label-md transition-all duration-300 z-10 text-on-surface-variant" id="registerTab" onclick="switchTab('register')">S'inscrire</button>
+<!-- Sliding background indicator -->
+<div class="absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-white shadow-sm rounded-full transition-transform duration-300 transform translate-x-0" id="tabIndicator"></div>
+</div>
+<!-- Form Container -->
+<div class="space-y-stack-lg">
+<header>
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-2" id="formTitle">Bon retour parmi nous</h2>
+<p class="font-body-md text-body-md text-on-surface-variant" id="formSubtext">Accédez à votre espace de travail collaboratif.</p>
+</header>
+<form class="space-y-stack-md" id="authForm" onsubmit="handleSubmit(event)">
+<!-- Username Field (Conditional) -->
+<div class="hidden opacity-0 h-0 overflow-hidden transition-all duration-300" id="usernameField">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1 ml-1" for="username">NOM D'UTILISATEUR</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-surface-tint focus:border-primary transition-all outline-none text-body-md" id="username" placeholder="votre_nom" type="text">
+</div>
+</div>
+<!-- Email Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1 ml-1" for="email">E-MAIL</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">mail</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-surface-tint focus:border-primary transition-all outline-none text-body-md" id="email" placeholder="nom@exemple.com" required="" type="email">
+</div>
+</div>
+<!-- Password Field -->
+<div>
+<div class="flex justify-between items-center mb-1 ml-1">
+<label class="block font-label-md text-label-md text-on-surface-variant" for="password">MOT DE PASSE</label>
+<a class="text-label-md text-primary font-semibold hover:underline" href="#" id="forgotPassword">Oublié ?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-surface-tint focus:border-primary transition-all outline-none text-body-md" id="password" placeholder="••••••••" required="" type="password">
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-4 bg-primary text-on-primary rounded-xl font-headline-md text-headline-md hover:bg-primary-container active:scale-[0.98] transition-all shadow-md mt-stack-md flex items-center justify-center gap-2" id="submitBtn" type="submit">
+                            Se connecter
+                        </button>
+</form>
+<!-- Divider -->
+
+<!-- Social Logins -->
+
+</div>
+<!-- Footer Info -->
+<footer class="mt-margin-desktop text-center">
+<p class="text-body-sm text-on-surface-variant">
+                        En continuant, vous acceptez nos 
+                        <a class="text-primary hover:underline font-semibold" href="#">Conditions d'utilisation</a> 
+                        et notre 
+                        <a class="text-primary hover:underline font-semibold" href="#">Politique de confidentialité</a>.
+                    </p>
+</footer>
+</div>
+</section>
+</main>
+<script>
+        let currentMode = 'login';
+
+        function switchTab(mode) {
+            if (mode === currentMode) return;
+            currentMode = mode;
+
+            const indicator = document.getElementById('tabIndicator');
+            const loginTab = document.getElementById('loginTab');
+            const registerTab = document.getElementById('registerTab');
+            const usernameField = document.getElementById('usernameField');
+            const formTitle = document.getElementById('formTitle');
+            const formSubtext = document.getElementById('formSubtext');
+            const submitBtn = document.getElementById('submitBtn');
+            const forgotPassword = document.getElementById('forgotPassword');
+
+            if (mode === 'register') {
+                indicator.style.transform = 'translateX(100%)';
+                loginTab.classList.replace('text-on-surface', 'text-on-surface-variant');
+                registerTab.classList.replace('text-on-surface-variant', 'text-on-surface');
+                
+                // Show username field
+                usernameField.classList.remove('hidden');
+                setTimeout(() => {
+                    usernameField.classList.replace('opacity-0', 'opacity-100');
+                    usernameField.classList.replace('h-0', 'h-20');
+                }, 10);
+
+                formTitle.innerText = "Créer un compte";
+                formSubtext.innerText = "Rejoignez ProjetHub dès aujourd'hui.";
+                submitBtn.innerText = "S'inscrire";
+                forgotPassword.style.display = 'none';
+            } else {
+                indicator.style.transform = 'translateX(0)';
+                registerTab.classList.replace('text-on-surface', 'text-on-surface-variant');
+                loginTab.classList.replace('text-on-surface-variant', 'text-on-surface');
+
+                // Hide username field
+                usernameField.classList.replace('opacity-100', 'opacity-0');
+                usernameField.classList.replace('h-20', 'h-0');
+                setTimeout(() => usernameField.classList.add('hidden'), 300);
+
+                formTitle.innerText = "Bon retour parmi nous";
+                formSubtext.innerText = "Accédez à votre espace de travail collaboratif.";
+                submitBtn.innerText = "Se connecter";
+                forgotPassword.style.display = 'block';
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerText;
+            
+            btn.disabled = true;
+            btn.innerHTML = `<span class="animate-spin material-symbols-outlined">sync</span> Traitement...`;
+            
+            // Simulating API call
+            setTimeout(() => {
+                btn.classList.replace('bg-primary', 'bg-green-600');
+                btn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Succès`;
+                setTimeout(() => {
+                    btn.classList.replace('bg-green-600', 'bg-primary');
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }, 2000);
+            }, 1500);
+        }
+    </script>
+
+
+</body></html>
