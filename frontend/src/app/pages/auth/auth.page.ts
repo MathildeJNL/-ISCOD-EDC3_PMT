@@ -52,7 +52,7 @@ export class AuthPage {
     this.configureModeValidators(this.mode());
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.error.set('Corrigez les champs signalés avant de continuer.');
+      this.error.set('Éléments requis : complétez les champs obligatoires.');
       return;
     }
 

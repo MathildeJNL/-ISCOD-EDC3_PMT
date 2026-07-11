@@ -31,6 +31,7 @@ export class TaskDetailPage implements OnInit {
   readonly task = signal<ProjectTask | null>(null);
   readonly history = signal<Activity[]>([]);
   readonly error = signal<string | null>(null);
+  readonly formError = signal<string | null>(null);
   readonly saved = signal(false);
 
   readonly statuses: TaskStatus[] = ['TODO', 'IN_PROGRESS', 'REVIEW', 'DONE'];
@@ -81,9 +82,11 @@ export class TaskDetailPage implements OnInit {
   save() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      this.formError.set('Éléments requis : complétez les champs obligatoires.');
       return;
     }
 
+    this.formError.set(null);
     this.api.updateTask(this.taskId, this.form.getRawValue()).subscribe({
       next: (task) => {
         this.task.set(task);
@@ -91,7 +94,7 @@ export class TaskDetailPage implements OnInit {
         this.api.history(this.taskId).subscribe((history) => this.history.set(history));
         setTimeout(() => this.saved.set(false), 1800);
       },
-      error: (response) => this.error.set(response.error?.message ?? 'Mise a jour impossible.'),
+      error: (response) => this.error.set(response.error?.message ?? 'Mise à jour impossible.'),
     });
   }
 }

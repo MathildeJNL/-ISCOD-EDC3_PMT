@@ -19,11 +19,11 @@
         <p class="muted">{{ project()?.description }}</p>
       </div>
       <div class="topbar-actions">
-        <button class="secondary-action" type="button" (click)="showInviteForm.set(true)">
+        <button class="secondary-action" type="button" (click)="openInviteForm()">
           <span class="material-symbols-outlined">person_add</span>
           Inviter
         </button>
-        <button class="primary-action" type="button" (click)="showTaskForm.set(true)">
+        <button class="primary-action" type="button" (click)="openTaskForm()">
           <span class="material-symbols-outlined">add_task</span>
           Nouvelle tâche
         </button>
@@ -97,11 +97,11 @@
 </div>
 
 @if (showTaskForm()) {
-  <div class="modal-backdrop" (click)="showTaskForm.set(false)">
+  <div class="modal-backdrop" (click)="closeTaskForm()">
     <section class="modal-panel" (click)="$event.stopPropagation()">
       <header>
         <h2>Nouvelle tâche</h2>
-        <button class="icon-button" type="button" (click)="showTaskForm.set(false)" aria-label="Fermer">
+        <button class="icon-button" type="button" (click)="closeTaskForm()" aria-label="Fermer">
           <span class="material-symbols-outlined">close</span>
         </button>
       </header>
@@ -128,8 +128,11 @@
             }
           </select>
         </label>
+        @if (taskFormError()) {
+          <p class="alert form-alert">{{ taskFormError() }}</p>
+        }
         <div class="modal-actions">
-          <button class="secondary-action" type="button" (click)="showTaskForm.set(false)">Annuler</button>
+          <button class="secondary-action" type="button" (click)="closeTaskForm()">Annuler</button>
           <button class="primary-action" type="submit">Créer</button>
         </div>
       </form>
@@ -138,16 +141,22 @@
 }
 
 @if (showInviteForm()) {
-  <div class="modal-backdrop" (click)="showInviteForm.set(false)">
+  <div class="modal-backdrop" (click)="closeInviteForm()">
     <section class="modal-panel" (click)="$event.stopPropagation()">
       <header>
         <h2>Inviter un membre</h2>
-        <button class="icon-button" type="button" (click)="showInviteForm.set(false)" aria-label="Fermer">
+        <button class="icon-button" type="button" (click)="closeInviteForm()" aria-label="Fermer">
           <span class="material-symbols-outlined">close</span>
         </button>
       </header>
       <form [formGroup]="inviteForm" (ngSubmit)="inviteMember()">
-        <label><span>E-mail</span><input type="email" formControlName="email" /></label>
+        <label>
+          <span>E-mail</span>
+          <input type="email" formControlName="email" />
+          @if (inviteForm.controls.email.touched && inviteForm.controls.email.hasError('email')) {
+            <small class="field-error">Saisissez un e-mail valide.</small>
+          }
+        </label>
         <label>
           <span>Rôle</span>
           <select formControlName="role">
@@ -156,8 +165,11 @@
             }
           </select>
         </label>
+        @if (inviteFormError()) {
+          <p class="alert form-alert">{{ inviteFormError() }}</p>
+        }
         <div class="modal-actions">
-          <button class="secondary-action" type="button" (click)="showInviteForm.set(false)">Annuler</button>
+          <button class="secondary-action" type="button" (click)="closeInviteForm()">Annuler</button>
           <button class="primary-action" type="submit">Inviter</button>
         </div>
       </form>

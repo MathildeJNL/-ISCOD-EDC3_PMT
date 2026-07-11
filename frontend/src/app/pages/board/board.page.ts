@@ -36,6 +36,8 @@ export class BoardPage implements OnInit {
   readonly showTaskForm = signal(false);
   readonly showInviteForm = signal(false);
   readonly error = signal<string | null>(null);
+  readonly taskFormError = signal<string | null>(null);
+  readonly inviteFormError = signal<string | null>(null);
 
   readonly statuses: TaskStatus[] = ['TODO', 'IN_PROGRESS', 'REVIEW', 'DONE'];
   readonly priorities: TaskPriority[] = ['LOW', 'MEDIUM', 'HIGH', 'URGENT'];
@@ -87,11 +89,35 @@ export class BoardPage implements OnInit {
     return this.tasks().filter((task) => task.status === status);
   }
 
+  openTaskForm() {
+    this.taskFormError.set(null);
+    this.taskForm.markAsUntouched();
+    this.showTaskForm.set(true);
+  }
+
+  closeTaskForm() {
+    this.taskFormError.set(null);
+    this.showTaskForm.set(false);
+  }
+
+  openInviteForm() {
+    this.inviteFormError.set(null);
+    this.inviteForm.markAsUntouched();
+    this.showInviteForm.set(true);
+  }
+
+  closeInviteForm() {
+    this.inviteFormError.set(null);
+    this.showInviteForm.set(false);
+  }
+
   createTask() {
     if (this.taskForm.invalid) {
       this.taskForm.markAllAsTouched();
+      this.taskFormError.set('Éléments requis : complétez les champs obligatoires.');
       return;
     }
+    this.taskFormError.set(null);
     const value = this.taskForm.getRawValue();
     const assigneeIds = value.assigneeId > 0 ? [value.assigneeId] : [];
 
@@ -106,7 +132,7 @@ export class BoardPage implements OnInit {
       .subscribe({
         next: (task) => {
           this.tasks.update((items) => [task, ...items]);
-          this.showTaskForm.set(false);
+          this.closeTaskForm();
           this.taskForm.reset({
             title: '',
             description: '',
@@ -115,19 +141,21 @@ export class BoardPage implements OnInit {
             assigneeId: 0,
           });
         },
-        error: (response) => this.error.set(response.error?.message ?? 'Creation impossible.'),
+        error: (response) => this.error.set(response.error?.message ?? 'Création impossible.'),
       });
   }
 
   inviteMember() {
     if (this.inviteForm.invalid) {
       this.inviteForm.markAllAsTouched();
+      this.inviteFormError.set('Éléments requis : complétez les champs obligatoires.');
       return;
     }
+    this.inviteFormError.set(null);
     this.api.inviteMember(this.projectId, this.inviteForm.getRawValue()).subscribe({
       next: (member) => {
         this.members.update((items) => [...items, member]);
-        this.showInviteForm.set(false);
+        this.closeInviteForm();
         this.inviteForm.reset({ email: '', role: 'MEMBER' });
       },
       error: (response) => this.error.set(response.error?.message ?? 'Invitation impossible.'),
@@ -141,7 +169,7 @@ export class BoardPage implements OnInit {
     this.api.updateTask(task.id, { status }).subscribe({
       next: (updated) =>
         this.tasks.update((items) => items.map((item) => (item.id === updated.id ? updated : item))),
-      error: (response) => this.error.set(response.error?.message ?? 'Mise a jour impossible.'),
+      error: (response) => this.error.set(response.error?.message ?? 'Mise à jour impossible.'),
     });
   }
 
@@ -150,7 +178,7 @@ export class BoardPage implements OnInit {
     this.api.changeRole(this.projectId, member.id, role).subscribe({
       next: (updated) =>
         this.members.update((items) => items.map((item) => (item.id === updated.id ? updated : item))),
-      error: (response) => this.error.set(response.error?.message ?? 'Role impossible a modifier.'),
+      error: (response) => this.error.set(response.error?.message ?? 'Rôle impossible à modifier.'),
     });
   }
 }

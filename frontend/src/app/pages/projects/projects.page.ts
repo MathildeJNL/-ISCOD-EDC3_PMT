@@ -23,6 +23,7 @@ export class ProjectsPage implements OnInit {
   readonly query = signal('');
   readonly showCreate = signal(false);
   readonly error = signal<string | null>(null);
+  readonly createFormError = signal<string | null>(null);
   readonly user = this.auth.user;
 
   readonly createForm = this.fb.group({
@@ -66,16 +67,29 @@ export class ProjectsPage implements OnInit {
     });
   }
 
+  openCreateModal() {
+    this.createFormError.set(null);
+    this.createForm.markAsUntouched();
+    this.showCreate.set(true);
+  }
+
+  closeCreateModal() {
+    this.createFormError.set(null);
+    this.showCreate.set(false);
+  }
+
   createProject() {
     if (this.createForm.invalid) {
       this.createForm.markAllAsTouched();
+      this.createFormError.set('Éléments requis : complétez les champs obligatoires.');
       return;
     }
 
+    this.createFormError.set(null);
     this.api.createProject(this.createForm.getRawValue()).subscribe({
       next: (project) => {
         this.projects.update((items) => [project, ...items]);
-        this.showCreate.set(false);
+        this.closeCreateModal();
         this.createForm.reset({
           name: '',
           description: '',
@@ -83,7 +97,7 @@ export class ProjectsPage implements OnInit {
         });
         this.router.navigate(['/projects', project.id, 'board']);
       },
-      error: (response) => this.error.set(response.error?.message ?? 'Creation impossible.'),
+      error: (response) => this.error.set(response.error?.message ?? 'Création impossible.'),
     });
   }
 

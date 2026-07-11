@@ -30,7 +30,7 @@
             (input)="query.set($any($event.target).value)"
           />
         </label>
-        <button class="primary-action" type="button" (click)="showCreate.set(true)">
+        <button class="primary-action" type="button" (click)="openCreateModal()">
           <span class="material-symbols-outlined">add</span>
           Nouveau projet
         </button>
@@ -62,7 +62,7 @@
           </footer>
         </a>
       } @empty {
-        <button class="empty-state" type="button" (click)="showCreate.set(true)">
+        <button class="empty-state" type="button" (click)="openCreateModal()">
           <span class="material-symbols-outlined">add_circle</span>
           Créer votre premier projet
         </button>
@@ -72,11 +72,11 @@
 </div>
 
 @if (showCreate()) {
-  <div class="modal-backdrop" (click)="showCreate.set(false)">
+  <div class="modal-backdrop" (click)="closeCreateModal()">
     <section class="modal-panel" (click)="$event.stopPropagation()">
       <header>
         <h2>Nouveau projet</h2>
-        <button class="icon-button" type="button" (click)="showCreate.set(false)" aria-label="Fermer">
+        <button class="icon-button" type="button" (click)="closeCreateModal()" aria-label="Fermer">
           <span class="material-symbols-outlined">close</span>
         </button>
       </header>
@@ -94,8 +94,11 @@
           <span>Date de début</span>
           <input type="date" formControlName="startDate" />
         </label>
+        @if (createFormError()) {
+          <p class="alert form-alert">{{ createFormError() }}</p>
+        }
         <div class="modal-actions">
-          <button class="secondary-action" type="button" (click)="showCreate.set(false)">Annuler</button>
+          <button class="secondary-action" type="button" (click)="closeCreateModal()">Annuler</button>
           <button class="primary-action" type="submit">Créer</button>
         </div>
       </form>
