@@ -54,7 +54,7 @@ jobs:
   docker:
     needs: [backend, frontend]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    if: github.event_name == 'push' && github.repository == 'MathildeJNL/-ISCOD-EDC3_PMT' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
