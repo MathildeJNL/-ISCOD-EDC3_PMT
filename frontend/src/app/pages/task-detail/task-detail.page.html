@@ -1,8 +1,8 @@
 <div class="app-shell">
   <aside class="sidebar">
     <a class="sidebar-brand" routerLink="/projects">
-      <img class="brand-logo" src="projethub-logo.svg" alt="" />
-      <strong>ProjetHub</strong>
+      <img class="brand-logo" src="projectmanagementtool-logo.svg" alt="" />
+      <strong>ProjectManagementTool</strong>
     </a>
     <nav>
       <a routerLink="/projects"><span class="material-symbols-outlined">folder</span> Projets</a>
@@ -18,13 +18,13 @@
   <main class="workspace">
     <header class="topbar">
       <div>
-        <p class="eyebrow">Details de la tache</p>
-        <h1>{{ task()?.title ?? 'Tache' }}</h1>
+        <p class="eyebrow">Détails de la tâche</p>
+        <h1>{{ task()?.title ?? 'Tâche' }}</h1>
       </div>
       @if (task()) {
         <a class="secondary-action" [routerLink]="['/projects', task()!.projectId, 'board']">
           <span class="material-symbols-outlined">arrow_back</span>
-          Retour board
+          Retour au tableau
         </a>
       }
     </header>
@@ -33,7 +33,7 @@
       <p class="alert">{{ error() }}</p>
     }
     @if (saved()) {
-      <p class="success">Tache mise a jour.</p>
+      <p class="success">Tâche mise à jour.</p>
     }
 
     <section class="task-detail-layout">
@@ -41,9 +41,9 @@
         <label><span>Titre</span><input type="text" formControlName="title" /></label>
         <label><span>Description</span><textarea rows="7" formControlName="description"></textarea></label>
         <div class="form-grid">
-          <label><span>Echeance</span><input type="date" formControlName="dueDate" /></label>
+          <label><span>Échéance</span><input type="date" formControlName="dueDate" /></label>
           <label>
-            <span>Priorite</span>
+            <span>Priorité</span>
             <select formControlName="priority">
               @for (priority of priorities; track priority) {
                 <option [ngValue]="priority">{{ priorityLabel[priority] }}</option>
@@ -61,19 +61,19 @@
         </div>
 
         <section class="assignees">
-          <h2>Membres assignes</h2>
+          <h2>Membres assignés</h2>
           <div class="avatar-row">
             @for (assignee of task()?.assignees ?? []; track assignee.id) {
               <span class="avatar" [title]="assignee.email">{{ assignee.username.slice(0, 2).toUpperCase() }}</span>
             } @empty {
-              <span class="muted">Aucun assignee</span>
+              <span class="muted">Aucun assigné</span>
             }
           </div>
         </section>
 
         <button class="primary-action" type="submit">
           <span class="material-symbols-outlined">save</span>
-          Mettre a jour
+          Mettre à jour
         </button>
       </form>
 
@@ -93,7 +93,7 @@
               </div>
             </article>
           } @empty {
-            <p class="muted">Aucune activite.</p>
+            <p class="muted">Aucune activité.</p>
           }
         </div>
       </aside>

@@ -1,6 +1,6 @@
-# ProjetHub
+# ProjectManagementTool
 
-Application full stack Angular + Spring Boot pour l'etude de cas ProjetHub. Elle couvre l'inscription, la connexion, la creation de projets, l'invitation de membres, les roles projet, les taches Kanban, l'assignation, les notifications et l'historique des modifications.
+Application full stack Angular + Spring Boot pour l'étude de cas ProjectManagementTool. Elle couvre l'inscription, la connexion, la création de projets, l'invitation de membres, les rôles projet, les tâches Kanban, l'assignation, les notifications et l'historique des modifications.
 
 ## Stack
 
@@ -13,7 +13,7 @@ Application full stack Angular + Spring Boot pour l'etude de cas ProjetHub. Elle
 
 Le mot de passe des comptes inseres par `database/test-data.sql` est `Password123!`.
 
-- `mathilde@example.com` : administratrice du projet ProjetHub.
+- `mathilde@example.com` : administratrice du projet ProjectManagementTool.
 - `nicolas@example.com` : membre.
 - `mariana@example.com` : observatrice.
 
@@ -29,7 +29,7 @@ Services exposes :
 - Backend : http://localhost:8080
 - PostgreSQL : localhost:5432, base `pmt`, utilisateur `pmt`, mot de passe `pmt`
 
-Les scripts `database/schema.sql` et `database/test-data.sql` sont executes automatiquement au premier demarrage du volume PostgreSQL.
+Les scripts `database/schema.sql` et `database/test-data.sql` sont exécutés automatiquement au premier démarrage du volume PostgreSQL.
 
 ## Lancement en developpement
 
@@ -40,7 +40,7 @@ cd backend
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
-Le profil `dev` utilise une base H2 en memoire et cree le schema automatiquement.
+Le profil `dev` utilise une base H2 en mémoire et crée le schéma automatiquement.
 
 Frontend :
 
@@ -72,21 +72,21 @@ npm run test -- --watch=false --coverage
 
 Rapport Vitest : `frontend/coverage`.
 
-Les seuils backend Jacoco sont configures a 60% sur instructions et branches, comme demande dans l'etude de cas.
+Les seuils backend Jacoco sont configurés à 60% sur instructions et branches, comme demandé dans l'étude de cas.
 
 ## API principale
 
-L'API utilise le header `X-User-Id` pour identifier l'utilisateur courant. Spring Security n'est volontairement pas ajoute, conformement a l'enonce.
+L'API utilise le header `X-User-Id` pour identifier l'utilisateur courant. Spring Security n'est volontairement pas ajouté, conformément à l'énoncé.
 
 - `POST /api/auth/register` : inscription.
 - `POST /api/auth/login` : connexion.
 - `GET /api/projects` : projets visibles par l'utilisateur.
-- `POST /api/projects` : creation de projet, le createur devient `ADMIN`.
+- `POST /api/projects` : création de projet, le créateur devient `ADMIN`.
 - `POST /api/projects/{projectId}/members` : invitation par e-mail, reservee aux administrateurs.
 - `PATCH /api/projects/{projectId}/members/{memberId}/role` : changement de role.
-- `GET /api/projects/{projectId}/tasks` : tableau des taches.
-- `POST /api/projects/{projectId}/tasks` : creation de tache par `ADMIN` ou `MEMBER`.
-- `PATCH /api/tasks/{taskId}` : mise a jour d'une tache.
+- `GET /api/projects/{projectId}/tasks` : tableau des tâches.
+- `POST /api/projects/{projectId}/tasks` : création de tâche par `ADMIN` ou `MEMBER`.
+- `PATCH /api/tasks/{taskId}` : mise à jour d'une tâche.
 - `POST /api/tasks/{taskId}/assignments` : assignation.
 - `GET /api/tasks/{taskId}/history` : historique.
 - `GET /api/notifications` : notifications de l'utilisateur.
@@ -95,25 +95,25 @@ L'API utilise le header `X-User-Id` pour identifier l'utilisateur courant. Sprin
 
 Le workflow `.github/workflows/ci-cd.yml` :
 
-1. execute les tests backend et publie le rapport Jacoco en artefact ;
-2. execute les tests frontend avec couverture et build Angular ;
+1. exécute les tests backend et publie le rapport Jacoco en artefact ;
+2. exécute les tests frontend avec couverture et build Angular ;
 3. construit et pousse les images Docker Hub sur `main` ou `master`.
 
 Le workflow se lance automatiquement sur `push` et `pull_request` vers `main` ou `master`.
-Il peut aussi etre lance manuellement depuis l'onglet GitHub Actions avec `workflow_dispatch`.
+Il peut aussi être lancé manuellement depuis l'onglet GitHub Actions avec `workflow_dispatch`.
 
 Secrets GitHub requis :
 
 - `DOCKERHUB_USERNAME`
 - `DOCKERHUB_TOKEN`
 
-Ces secrets doivent etre ajoutes dans le depot GitHub :
+Ces secrets doivent être ajoutés dans le dépôt GitHub :
 `Settings` > `Secrets and variables` > `Actions` > `New repository secret`.
 
-Le token Docker Hub doit etre un token d'acces Docker Hub, pas le mot de passe du compte.
+Le token Docker Hub doit être un token d'accès Docker Hub, pas le mot de passe du compte.
 Sans ces deux secrets, les tests CI s'executent mais le job Docker echoue explicitement.
 
-Images poussees :
+Images poussées :
 
 - `${DOCKERHUB_USERNAME}/pmt-backend:latest`
 - `${DOCKERHUB_USERNAME}/pmt-frontend:latest`

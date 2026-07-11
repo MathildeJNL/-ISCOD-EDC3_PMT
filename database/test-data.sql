@@ -4,7 +4,7 @@ insert into app_users (id, username, email, password_hash, created_at) values
     (3, 'mariana', 'mariana@example.com', 'pbkdf2$65536$bWFyaWFuYS1zYWx0LTAx$kfh7kXfsdyUCELKFbXf2FiKeuXhCd9+2X/2d3Pe70DU=', now());
 
 insert into projects (id, name, description, start_date, created_at) values
-    (1, 'ProjetHub', 'Plateforme de gestion de projet collaboratif pour equipes de developpement logiciel.', '2026-07-01', now()),
+    (1, 'ProjectManagementTool', 'Plateforme de gestion de projet collaboratif pour équipes de développement logiciel.', '2026-07-01', now()),
     (2, 'Refonte portail client', 'Modernisation du portail client et suivi des demandes support.', '2026-06-15', now());
 
 insert into project_members (id, project_id, user_id, role, joined_at) values
@@ -15,10 +15,10 @@ insert into project_members (id, project_id, user_id, role, joined_at) values
     (5, 2, 3, 'MEMBER', now());
 
 insert into tasks (id, project_id, title, description, due_date, priority, status, created_by, created_at, updated_at) values
-    (1, 1, 'Modeliser le domaine metier', 'Creer les entites utilisateurs, projets, roles, taches, notifications et historique.', '2026-07-10', 'URGENT', 'IN_PROGRESS', 1, now(), now()),
-    (2, 1, 'Construire le tableau Kanban', 'Afficher les taches par statut et permettre les changements de statut.', '2026-07-12', 'HIGH', 'TODO', 1, now(), now()),
+    (1, 1, 'Modéliser le domaine métier', 'Créer les entités utilisateurs, projets, rôles, tâches, notifications et historique.', '2026-07-10', 'URGENT', 'IN_PROGRESS', 1, now(), now()),
+    (2, 1, 'Construire le tableau Kanban', 'Afficher les tâches par statut et permettre les changements de statut.', '2026-07-12', 'HIGH', 'TODO', 1, now(), now()),
     (3, 1, 'Configurer la pipeline CI/CD', 'Automatiser tests, build Docker et push Docker Hub.', '2026-07-15', 'MEDIUM', 'TODO', 2, now(), now()),
-    (4, 2, 'Audit UX du portail', 'Lister les parcours a simplifier pour les utilisateurs support.', '2026-07-20', 'LOW', 'REVIEW', 3, now(), now());
+    (4, 2, 'Audit UX du portail', 'Lister les parcours à simplifier pour les utilisateurs support.', '2026-07-20', 'LOW', 'REVIEW', 3, now(), now());
 
 insert into task_assignments (id, task_id, assignee_id, assigned_by, assigned_at) values
     (1, 1, 2, 1, now()),
@@ -27,7 +27,7 @@ insert into task_assignments (id, task_id, assignee_id, assigned_by, assigned_at
     (4, 4, 3, 1, now());
 
 insert into notifications (id, recipient_id, project_id, task_id, title, message, created_at) values
-    (1, 2, 1, 1, 'Task assigned', 'mathilde assigned you to Modeliser le domaine metier', now()),
+    (1, 2, 1, 1, 'Task assigned', 'mathilde assigned you to Modéliser le domaine métier', now()),
     (2, 1, 1, 2, 'Task assigned', 'mathilde assigned you to Construire le tableau Kanban', now());
 
 insert into task_activities (id, task_id, actor_id, action, details, created_at) values

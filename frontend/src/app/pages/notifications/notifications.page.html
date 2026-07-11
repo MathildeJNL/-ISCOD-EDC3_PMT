@@ -1,8 +1,8 @@
 <div class="app-shell">
   <aside class="sidebar">
     <a class="sidebar-brand" routerLink="/projects">
-      <img class="brand-logo" src="projethub-logo.svg" alt="" />
-      <strong>ProjetHub</strong>
+      <img class="brand-logo" src="projectmanagementtool-logo.svg" alt="" />
+      <strong>ProjectManagementTool</strong>
     </a>
     <nav>
       <a routerLink="/projects"><span class="material-symbols-outlined">folder</span> Projets</a>
@@ -36,7 +36,7 @@
           </div>
           <div class="notification-actions">
             @if (notification.taskId) {
-              <a class="secondary-action" [routerLink]="['/tasks', notification.taskId]">Voir tache</a>
+              <a class="secondary-action" [routerLink]="['/tasks', notification.taskId]">Voir tâche</a>
             } @else {
               <a class="secondary-action" [routerLink]="['/projects', notification.projectId, 'board']">
                 Voir projet

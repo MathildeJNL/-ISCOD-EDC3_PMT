@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">ProjectManagementTool</title>
+  <rect width="64" height="64" rx="14" fill="#141125"/>
+  <g fill="#9b8cff">
+    <path d="M29 6h10l2 8a23 23 0 0 1 5 2l7-4 7 7-4 7a23 23 0 0 1 2 5l8 2v10l-8 2a23 23 0 0 1-2 5l4 7-7 7-7-4a23 23 0 0 1-5 2l-2 8H29l-2-8a23 23 0 0 1-5-2l-7 4-7-7 4-7a23 23 0 0 1-2-5l-8-2V33l8-2a23 23 0 0 1 2-5l-4-7 7-7 7 4a23 23 0 0 1 5-2z"/>
+  </g>
+  <circle cx="34" cy="38" r="17" fill="#141125"/>
+  <path d="M42 23a18 18 0 1 0 0 30" fill="none" stroke="#9b8cff" stroke-width="8" stroke-linecap="round"/>
+</svg>

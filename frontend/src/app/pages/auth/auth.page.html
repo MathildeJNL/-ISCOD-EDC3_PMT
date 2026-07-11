@@ -1,13 +1,13 @@
 <main class="auth-shell">
   <section class="auth-visual">
     <div class="brand-mark">
-      <img class="brand-logo" src="projethub-logo.svg" alt="" />
-      <strong>ProjetHub</strong>
+      <img class="brand-logo" src="projectmanagementtool-logo.svg" alt="" />
+      <strong>ProjectManagementTool</strong>
     </div>
     <div class="visual-panel">
       <span class="material-symbols-outlined panel-icon">rocket_launch</span>
-      <h1>Accelerez vos projets.</h1>
-      <p>Planifiez, assignez et suivez le travail de votre equipe depuis un espace unique.</p>
+      <h1>Accélérez vos projets.</h1>
+      <p>Planifiez, assignez et suivez le travail de votre équipe depuis un espace unique.</p>
     </div>
     <div class="visual-metrics">
       <article>
@@ -16,15 +16,15 @@
       </article>
       <article>
         <span>86%</span>
-        <small>taches suivies</small>
+        <small>tâches suivies</small>
       </article>
     </div>
   </section>
 
   <section class="auth-form-panel">
     <div class="mobile-brand">
-      <img class="brand-logo" src="projethub-logo.svg" alt="" />
-      <strong>ProjetHub</strong>
+      <img class="brand-logo" src="projectmanagementtool-logo.svg" alt="" />
+      <strong>ProjectManagementTool</strong>
     </div>
 
     <div class="segmented">
@@ -37,12 +37,12 @@
     </div>
 
     <header>
-      <h2>{{ mode() === 'login' ? 'Bon retour parmi nous' : 'Creer un compte' }}</h2>
+      <h2>{{ mode() === 'login' ? 'Bon retour parmi nous' : 'Créer un compte' }}</h2>
       <p>
         {{
           mode() === 'login'
-            ? 'Accedez a votre espace collaboratif.'
-            : 'Creez votre acces et demarrez un premier projet.'
+            ? 'Accédez à votre espace collaboratif.'
+            : 'Créez votre accès et démarrez un premier projet.'
         }}
       </p>
     </header>
@@ -62,7 +62,7 @@
             <small class="field-error">Le nom utilisateur est requis.</small>
           }
           @if (hasError('username', 'minlength')) {
-            <small class="field-error">Le nom utilisateur doit contenir au moins 3 caracteres.</small>
+            <small class="field-error">Le nom utilisateur doit contenir au moins 3 caractères.</small>
           }
         </label>
       }
@@ -89,7 +89,7 @@
         <input
           type="password"
           formControlName="password"
-          placeholder="8 caracteres minimum"
+          placeholder="8 caractères minimum"
           [autocomplete]="mode() === 'login' ? 'current-password' : 'new-password'"
           [class.invalid]="fieldInvalid('password')"
         />
@@ -97,7 +97,7 @@
           <small class="field-error">Le mot de passe est requis.</small>
         }
         @if (mode() === 'register' && hasError('password', 'minlength')) {
-          <small class="field-error">Le mot de passe doit contenir au moins 8 caracteres.</small>
+          <small class="field-error">Le mot de passe doit contenir au moins 8 caractères.</small>
         }
         @if (mode() === 'register' && hasError('password', 'passwordStrength')) {
           <small class="field-error">Ajoutez au moins une majuscule, une minuscule et un chiffre.</small>

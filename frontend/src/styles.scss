@@ -85,6 +85,11 @@ button {
   text-decoration: none;
 }
 
+.sidebar-brand strong {
+  overflow-wrap: anywhere;
+  line-height: 1.08;
+}
+
 .sidebar-brand .material-symbols-outlined,
 .sidebar-brand .brand-logo {
   display: grid;
