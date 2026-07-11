@@ -362,6 +362,26 @@ select:focus {
   outline: none;
 }
 
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: var(--danger);
+  background: #fff7f7;
+}
+
+input.ng-invalid.ng-touched:focus,
+textarea.ng-invalid.ng-touched:focus,
+select.ng-invalid.ng-touched:focus {
+  box-shadow: 0 0 0 4px rgba(186, 26, 26, 0.12);
+}
+
+.field-error {
+  color: var(--danger);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
 .form-grid {
   display: grid;
   gap: 14px;
@@ -372,6 +392,10 @@ select:focus {
   display: flex;
   gap: 10px;
   justify-content: flex-end;
+}
+
+.form-alert {
+  margin: 0;
 }
 
 .icon-button {

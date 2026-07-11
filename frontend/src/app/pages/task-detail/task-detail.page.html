@@ -71,6 +71,10 @@
           </div>
         </section>
 
+        @if (formError()) {
+          <p class="alert form-alert">{{ formError() }}</p>
+        }
+
         <button class="primary-action" type="submit">
           <span class="material-symbols-outlined">save</span>
           Mettre à jour
