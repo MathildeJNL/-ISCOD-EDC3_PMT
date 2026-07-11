@@ -1,4 +1,4 @@
-# Schema de base de donnees ProjetHub
+# Schéma de base de données ProjectManagementTool
 
 ```mermaid
 erDiagram

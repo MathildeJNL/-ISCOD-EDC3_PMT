@@ -52,7 +52,7 @@ export class AuthPage {
     this.configureModeValidators(this.mode());
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.error.set('Corrigez les champs signales avant de continuer.');
+      this.error.set('Corrigez les champs signalés avant de continuer.');
       return;
     }
 
@@ -136,7 +136,7 @@ export class AuthPage {
     }
 
     if (response.status === 0) {
-      return "Impossible de joindre l'API. Verifiez que le backend est lance.";
+      return "Impossible de joindre l'API. Vérifiez que le backend est lancé.";
     }
     if (response.status === 403) {
       return 'E-mail ou mot de passe incorrect.';
@@ -144,14 +144,14 @@ export class AuthPage {
     if (response.status === 409) {
       const message = response.error?.message as string | undefined;
       if (message?.includes('Email')) {
-        return 'Cet e-mail est deja utilise.';
+        return 'Cet e-mail est déjà utilisé.';
       }
       if (message?.includes('Username')) {
-        return 'Ce nom utilisateur est deja utilise.';
+        return 'Ce nom utilisateur est déjà utilisé.';
       }
     }
     if (response.status >= 500) {
-      return "Erreur serveur : la base locale ou l'API n'est pas prete. Le backend doit etre relance en profil dev.";
+      return "Erreur serveur : la base locale ou l'API n'est pas prête. Le backend doit être relancé en profil dev.";
     }
 
     const apiMessage = typeof response.error?.message === 'string' ? response.error.message : null;

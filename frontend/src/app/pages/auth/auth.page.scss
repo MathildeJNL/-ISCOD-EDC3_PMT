@@ -32,6 +32,12 @@
   font-size: 20px;
 }
 
+.brand-mark strong,
+.mobile-brand strong {
+  overflow-wrap: anywhere;
+  line-height: 1.08;
+}
+
 .brand-mark .material-symbols-outlined,
 .mobile-brand .material-symbols-outlined,
 .brand-mark .brand-logo,

@@ -1,8 +1,8 @@
 <div class="app-shell">
   <aside class="sidebar">
     <a class="sidebar-brand" routerLink="/projects">
-      <img class="brand-logo" src="projethub-logo.svg" alt="" />
-      <strong>ProjetHub</strong>
+      <img class="brand-logo" src="projectmanagementtool-logo.svg" alt="" />
+      <strong>ProjectManagementTool</strong>
     </a>
     <nav>
       <a class="active" routerLink="/projects"><span class="material-symbols-outlined">folder</span> Projets</a>
@@ -10,7 +10,7 @@
     </nav>
     <button class="ghost-on-dark" type="button" (click)="logout()">
       <span class="material-symbols-outlined">logout</span>
-      Deconnexion
+      Déconnexion
     </button>
   </aside>
 
@@ -44,7 +44,7 @@
     <section class="stats-grid" aria-label="Statistiques projets">
       <article><span>Total</span><strong>{{ stats().total }}</strong></article>
       <article><span>En cours</span><strong>{{ stats().active }}</strong></article>
-      <article><span>Termines</span><strong>{{ stats().done }}</strong></article>
+      <article><span>Terminés</span><strong>{{ stats().done }}</strong></article>
       <article><span>A surveiller</span><strong>{{ stats().late }}</strong></article>
     </section>
 
@@ -64,7 +64,7 @@
       } @empty {
         <button class="empty-state" type="button" (click)="showCreate.set(true)">
           <span class="material-symbols-outlined">add_circle</span>
-          Creer votre premier projet
+          Créer votre premier projet
         </button>
       }
     </section>
@@ -91,12 +91,12 @@
           <textarea formControlName="description" rows="4" placeholder="Objectifs et contexte du projet"></textarea>
         </label>
         <label>
-          <span>Date de debut</span>
+          <span>Date de début</span>
           <input type="date" formControlName="startDate" />
         </label>
         <div class="modal-actions">
           <button class="secondary-action" type="button" (click)="showCreate.set(false)">Annuler</button>
-          <button class="primary-action" type="submit">Creer</button>
+          <button class="primary-action" type="submit">Créer</button>
         </div>
       </form>
     </section>

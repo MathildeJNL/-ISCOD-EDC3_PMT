@@ -74,10 +74,10 @@ export interface NotificationItem {
 }
 
 export const TASK_STATUS_LABEL: Record<TaskStatus, string> = {
-  TODO: 'A faire',
+  TODO: 'À faire',
   IN_PROGRESS: 'En cours',
   REVIEW: 'Revue',
-  DONE: 'Termine',
+  DONE: 'Terminé',
 };
 
 export const PRIORITY_LABEL: Record<TaskPriority, string> = {
